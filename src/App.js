@@ -18,7 +18,7 @@ class Form extends React.Component {
       }}>
         > <input
           type="text"
-          autofocus="autofocus"
+          autoFocus="autofocus"
           value={this.state.input}
           onChange={event => this.setState({ input: event.target.value })}
         />
