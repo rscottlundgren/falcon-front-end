@@ -6,6 +6,7 @@ class Form extends React.Component {
   state = {
     input: ''
   }
+
   handleSubmit = (event) => {
     event.preventDefault()
     console.log(this.state.input)
@@ -17,12 +18,11 @@ class Form extends React.Component {
         display: this.props.isComplete === false ? 'none' : ''
       }}>
         > <input
+          ref={input => input && input.focus()}
           type="text"
-          autoFocus="autofocus"
           value={this.state.input}
           onChange={event => this.setState({ input: event.target.value })}
         />
-        <button>Submit</button>
       </form>
     )
   }
