@@ -1,59 +1,15 @@
-import React from 'react';
-import Typed from 'react-typed'
-import './App.css';
-
-class Form extends React.Component {
-  state = {
-    input: ''
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(this.state.input)
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit} style={{
-        display: this.props.isComplete === false ? 'none' : ''
-      }}>
-        > <input
-          ref={input => input && input.focus()}
-          type="text"
-          style={{
-            border: 'none',
-            outline: 'none'
-          }}
-          value={this.state.input}
-          onChange={event => this.setState({ input: event.target.value })}
-        />
-      </form>
-    )
-  }
-}
+import React from 'react'
+import Terminal from './components/Terminal'
+import './App.css'
 
 class App extends React.Component {
-  state = {
-    isComplete: false
-  }
-
-  render() {
-    return (
-      <div className="">
-        <Typed
-          strings={[
-            'Shall we play a game?']}
-          typeSpeed={40}
-          onComplete={self => {
-            self.cursor.remove()
-            this.setState({ isComplete: true })
-          }}
-        />
-        <p />
-        <Form isComplete={this.state.isComplete}/>
-      </div>
-    )
-  }
+	render() {
+		return (
+			<div className=''>
+				<Terminal />
+			</div>
+		)
+	}
 }
 
-export default App;
+export default App
