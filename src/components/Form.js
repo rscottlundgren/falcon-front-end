@@ -2,29 +2,29 @@ import React from 'react'
 
 class Form extends React.Component {
 	state = {
-		input: '',
-	}
-
-	handleSubmit = (event) => {
-		event.preventDefault()
-		console.log(this.state.input)
+		input: this.props.input,
 	}
 
 	render() {
 		return (
 			<form
-				onSubmit={this.handleSubmit}
 				style={{
 					display: this.props.isComplete === false ? 'none' : '',
+				}}
+				onSubmit={(event) => {
+					this.props.onSubmit(event, this.state.input)
 				}}
 			>
 				{'> '}
 				<input
 					ref={(input) => input && input.focus()}
 					type='text'
+					disabled={this.props.isDisabled}
 					style={{
 						border: 'none',
 						outline: 'none',
+						backgroundColor: '#FFF',
+						color: '#000',
 					}}
 					value={this.state.input}
 					onChange={(event) => this.setState({ input: event.target.value })}
