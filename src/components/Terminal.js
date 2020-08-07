@@ -1,27 +1,46 @@
 import React, { Component } from 'react'
 import Form from './Form'
+import Falcon from './Falcon'
 import Messages from './Alerts/Messages'
-import Typed from 'react-typed'
 
 class Terminal extends Component {
 	state = {
-		strings: Messages.intro,
+		output: Messages.intro,
+		userInput: '',
 		isComplete: false,
+		isDisabled: '',
+	}
+
+	markComplete = () => {
+		this.setState({
+			isComplete: true,
+		})
+	}
+
+	onSubmit = (event, userInput) => {
+		event.preventDefault()
+		this.setState({
+			userInput: userInput,
+			isDisabled: 'disabled',
+		})
 	}
 
 	render() {
 		return (
 			<div>
-				<Typed
-					strings={[this.state.strings]}
-					typeSpeed={40}
-					onComplete={(self) => {
-						self.cursor.remove()
-						this.setState({ isComplete: true })
-					}}
+				<Falcon
+					output={this.state.output}
+					markComplete={this.markComplete}
+					isComplete={this.state.isComplete}
 				/>
 				<p />
-				<Form isComplete={this.state.isComplete} />
+				<Form
+					input={this.state.userInput}
+					onSubmit={this.onSubmit}
+					isComplete={this.state.isComplete}
+					isDisabled={this.state.isDisabled}
+				/>
+				<p />
 			</div>
 		)
 	}
