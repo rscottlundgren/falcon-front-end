@@ -1,46 +1,33 @@
 import React, { Component } from 'react'
-import Form from './Form'
-import Falcon from './Falcon'
+import InputOutput from './InputOutput'
 import Messages from './Alerts/Messages'
 
 class Terminal extends Component {
 	state = {
-		output: Messages.intro,
-		userInput: '',
-		isComplete: false,
-		isDisabled: '',
+		conversation: [
+			{
+				output: Messages.intro,
+				userInput: '',
+				isDisabled: '',
+			},
+		],
 	}
 
-	markComplete = () => {
-		this.setState({
-			isComplete: true,
-		})
-	}
-
-	onSubmit = (event, userInput) => {
-		event.preventDefault()
-		this.setState({
-			userInput: userInput,
-			isDisabled: 'disabled',
-		})
-	}
+	// onSubmit = (event) => {
+	// 	event.preventDefault()
+	// 	console.log('OnSubmit located in "Terminal" component')
+	// 	// this.setState={
+	// 	// 	this.state.conversation.map(dialog => dialog.id === id ? {...dialog, userInput} : dialog)
+	// 	// }
+	// }
 
 	render() {
 		return (
 			<div>
-				<Falcon
-					output={this.state.output}
-					markComplete={this.markComplete}
-					isComplete={this.state.isComplete}
+				<InputOutput
+					output={this.state.conversation[0].output}
+					// onSubmit={this.onSubmit}
 				/>
-				<p />
-				<Form
-					input={this.state.userInput}
-					onSubmit={this.onSubmit}
-					isComplete={this.state.isComplete}
-					isDisabled={this.state.isDisabled}
-				/>
-				<p />
 			</div>
 		)
 	}
